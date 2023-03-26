@@ -5,6 +5,7 @@ from unidecode import unidecode
 import xmltodict
 import re
 
+# TODO: verify if city from cep and city forecast are in the same UF
 def city_forecast_from_cep(cep):
     is_cep_valid, cep = valid_cep(cep)
     if(not is_cep_valid):
@@ -47,4 +48,4 @@ def valid_cep(cep):
             return False, sanitized_cep
         else:
             sanitized_cep = cep.replace("-","")
-            return True
+            return True, sanitized_cep
