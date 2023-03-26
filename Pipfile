@@ -8,6 +8,7 @@ flask = "*"
 requests = "*"
 xmltodict = "*"
 unidecode = "*"
+flask-restx = "*"
 
 [dev-packages]
 autopep8 = "*"
