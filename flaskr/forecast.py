@@ -1,9 +1,14 @@
-from flask import abort, jsonify
+from flask import jsonify
+from flask_restx import abort
 import requests
 from unidecode import unidecode
 import xmltodict
+import re
 
 def city_forecast_from_cep(cep):
+    is_cep_valid, cep = valid_cep(cep)
+    if(not is_cep_valid):
+       abort(422,error="Invalid CEP format")
     viacep_url = f"https://viacep.com.br/ws/{cep}/json"
     viacep_response = requests.request("GET",viacep_url)
     viacep_data = viacep_response.json()
@@ -32,3 +37,14 @@ def city_forecast_from_cep(cep):
     )
 
     return forecast_response
+
+def valid_cep(cep):
+        sanitized_cep = ""
+        cep = cep.replace(" ","")
+        padrao_cep = re.compile(r'(\d){5}-?(\d){3}')
+        match = padrao_cep.match(cep)
+        if match == None:
+            return False, sanitized_cep
+        else:
+            sanitized_cep = cep.replace("-","")
+            return True
