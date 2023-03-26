@@ -13,3 +13,4 @@ Criar uma API REST em Python, com Flask e MongoDB
 
 ## Docs
 https://flask.palletsprojects.com/en/2.2.x/tutorial/
+https://flask-restx.readthedocs.io/en/latest/example.html
